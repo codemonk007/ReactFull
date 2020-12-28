@@ -1,0 +1,12 @@
+.imageind{
+    cursor: pointer;
+    margin: 2px;
+    border: 1px solid black;
+    padding: 7px;
+}
+.elementstyle{
+    white-space:nowrap;
+}
+elementstyle img {
+    display:inline;
+}

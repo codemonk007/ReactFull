@@ -1,0 +1,16 @@
+.ullist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .liList {
+    display: inline;
+    padding: 4px;
+    font-family: inherit;
+    font-size: 18px;
+    background: white;
+    font-weight: bold;
+  }
+  .liList:hover{
+     cursor: pointer;
+  }
