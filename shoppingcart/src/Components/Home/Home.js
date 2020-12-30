@@ -10,22 +10,18 @@ class Home extends Component{
       this.props.history.push("/productlist");
     }
     render(){
-                let types = Object.keys(this.props.product);
+        let types = Object.keys(this.props.product);
         console.log("types",types);
-        return (<div>
-           {
-               this.props.product.books.map((element)=>{  
-                return (<img onClick={()=> this.productHandler()} className="product" style={{height: '20em'}} key={element.id} src={element.imageurl}/>)})
-           }
-           {
-               this.props.product.mobiles.map((element)=>{  
-                return (<img onClick={this.productHandler} className="product" style={{height: '20em'}} key={element} src={"./mobile/"+element+".jpg"}/>)})
-           }
-           {
-              this.props.product.vegitables.map((element)=>{  
-                return (<img onClick={this.productHandler} className="product" style={{height: '20em'}} key={element} src={"./vegitables/"+element+".jpg"}/>)})
-           }
-        </div>)
+        return (
+            <div>
+                {
+                    types.map(outerelement=>{
+                           return this.props.product[`${outerelement}`].map((element)=>{  
+                            return (<img onClick={()=> this.productHandler()} className="product" style={{height: '20em'}} key={element.id} src={element.imageurl}/>)})
+                    })
+                }
+            </div>
+        )
     }
 }
 function mapStateToProps(state) {
