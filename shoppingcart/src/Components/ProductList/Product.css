@@ -1,0 +1,16 @@
+.outerLayer{
+    padding-bottom: 7px;
+    padding-top: 7px;
+    margin-top: 11px;
+    border: 1px solid black;
+    margin-bottom: 11px;
+}
+.product{
+    height: 20em;
+    padding-left: 15px;
+    padding-right: 16px;
+}
+.product:hover{
+    background-color: #3a5d83;
+    cursor: pointer;
+}

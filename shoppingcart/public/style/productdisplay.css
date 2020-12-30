@@ -1,0 +1,38 @@
+.productImage:hover{
+
+  height: 450px;
+  width: 450px;
+
+}
+
+.imageGrid1{
+  height: 250px;
+  background-color: transparent;
+
+}
+.imageGrid1:hover{
+  height: 350px;
+  width: 350px;
+}
+footer{
+  height:50px;
+  background-color: black;
+  text-align: center;
+
+}
+footer h4{
+  color: cornsilk;
+}
+
+.cartsignuplogin{
+  color: aqua;
+}
+/*product lIst page*/
+.panel-group .panel-info .panel-heading{
+
+  text-align: center;
+text-shadow: black;
+  -webkit-text-size-adjust: 80%;
+
+
+}
