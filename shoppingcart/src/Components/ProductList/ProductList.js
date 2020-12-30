@@ -18,8 +18,13 @@ class ProductList extends Component {
                               <div style={this.templteStyle}><strong>{outerelement}</strong></div>  
                            { this.props.product[`${outerelement}`].map((element)=>{  
                             return (
-                                
+                                <span className="productInd">
                                     <img className="product" style={{height: '20em'}} key={element.id} src={element.imageurl}/>  
+                                <span style={{display:"block"}}>gjgjgjhgh</span>
+                                <span style={{display:"block"}}>gjgjgjhgh</span>
+                                <span style={{display:"block"}}>gjgjgjhgh</span>
+                                </span>
+
                             )})}
                         </div>
                     })

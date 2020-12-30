@@ -9,8 +9,13 @@
     height: 20em;
     padding-left: 15px;
     padding-right: 16px;
+    display: inline;    
 }
 .product:hover{
     background-color: #3a5d83;
     cursor: pointer;
+}
+.productInd{
+    width: 10px;
+    display: inline-table;
 }

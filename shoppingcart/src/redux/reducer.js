@@ -57,8 +57,90 @@ const initialState = {
             Denaminamtion:"American",
             id:7
         }],
-    mobiles:[1,2,3,4,5],
-    vegitables:[2,3,4,5,6]
+    mobiles:[
+        {
+            name:"Angels and Deamons",
+            catagory:"Books",
+            Price:20,
+            imageurl:"./mobile/1.jpg",
+            Denaminamtion:"American",
+            id:1
+        },
+        {
+            name:"Because Life Is a gift",
+            catagory:"Books",
+            Price:20,
+            imageurl:"./mobile/2.jpg",
+            Denaminamtion:"American",
+            id:2
+        },
+        {
+            name:"Cosmos",
+            catagory:"Books",
+            Price:20,
+            id:3,
+            imageurl:"./mobile/3.jpg",
+            Denaminamtion:"American"
+        },
+        {
+            name:"Game Of Thrones",
+            catagory:"Books",
+            imageurl:"./mobile/4.jpg",
+            Price:20,
+            Denaminamtion:"American",
+            id:4
+        },
+        {
+            name:"Inferno",
+            catagory:"Books",
+            imageurl:"./mobile/5.jpg",
+            Price:20,
+            Denaminamtion:"American",
+            id:5
+        }
+    ],
+    vegitables:[
+        {
+            name:"Angels and Deamons",
+            catagory:"Books",
+            Price:20,
+            imageurl:"./vegitables/2.jpg",
+            Denaminamtion:"American",
+            id:1
+        },
+        {
+            name:"Because Life Is a gift",
+            catagory:"Books",
+            Price:20,
+            imageurl:"./vegitables/3.jpg",
+            Denaminamtion:"American",
+            id:2
+        },
+        {
+            name:"Cosmos",
+            catagory:"Books",
+            Price:20,
+            id:3,
+            imageurl:"./vegitables/4.jpg",
+            Denaminamtion:"American"
+        },
+        {
+            name:"Game Of Thrones",
+            catagory:"Books",
+            imageurl:"./vegitables/5.jpg",
+            Price:20,
+            Denaminamtion:"American",
+            id:4
+        },
+        {
+            name:"Inferno",
+            catagory:"Books",
+            imageurl:"./vegitables/6.jpg",
+            Price:20,
+            Denaminamtion:"American",
+            id:5
+        }
+    ]
     }
 }
 const reducer = (state=initialState,action) =>{
