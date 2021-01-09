@@ -25,8 +25,7 @@ class Home extends Component{
     }
 }
 function mapStateToProps(state) {
-    console.log("[FinalReview]",state);
-    
+    console.log("[Home page Details]",state);
     return {
         product: state.product
     };

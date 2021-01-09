@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Modal from './Modal/modal';
+import Modal from '../Modal/modal';
 class ProductDetails extends Component{
     state = {
         show: false

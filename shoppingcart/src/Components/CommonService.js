@@ -1,8 +1,6 @@
 class CommonService{
 
     getDenomination(denom){
-        console.log("hello");
-        
         switch (denom) {
             case "American":
                 return "$"

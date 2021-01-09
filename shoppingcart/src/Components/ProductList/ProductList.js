@@ -30,6 +30,17 @@ class ProductList extends Component {
         this.setState({...this.state,show:true})
         this.props.ProductDetails(Product);
     }
+    ProductAddToWishList(outerelement,element){
+        element.addToWishList = !element.addToWishList;
+        this.props.updateProduct({
+            catagory:outerelement,
+            product:element
+        });        
+    }
+    ProductAddToCart(element){
+        console.log("[PRODUCT]",element);  
+        this.props.addProduct(element);
+    }
     render() {
         let types = Object.keys(this.props.product);
         console.log("types", types);
@@ -48,8 +59,8 @@ class ProductList extends Component {
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.catagory}</label></span>
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.Price + " " + this.CS.getDenomination(element.Denaminamtion)}</label></span>
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}>
-                                            <button type="button" className="btn btn-success"><FontAwesomeIcon icon={faCartPlus} /></button>
-                                            <button className="btn btn-danger"><FontAwesomeIcon icon={faHeart} /></button>
+                                            <button type="button" className="btn btn-success" onClick={() =>  this.ProductAddToCart(element)}><FontAwesomeIcon icon={faCartPlus} /></button>
+                                            <button className="btn btn-primary" onClick={() =>  this.ProductAddToWishList(outerelement,element)}><FontAwesomeIcon id={element.addToWishList?'wishListActive':''}  icon={faHeart} /></button>
                                             <button className="btn btn-warning" onClick={() => this.ProductDetails(outerelement, element)}><FontAwesomeIcon style={{ "color": "white" }} icon={faInfo} /></button>
                                         </span>
                                     </span>
@@ -66,14 +77,15 @@ class ProductList extends Component {
 function mapStateToProps(state) {
     console.log("[ProductList]", state);
     return {
-        product: state.product
+        product: {...state.product}
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-
-        ProductDetails: (obj) => dispatch({type: actionTypes.productDetails,productDetails:obj})
+        ProductDetails: (obj) => dispatch({type: actionTypes.productDetails,productDetails:obj}),
+        updateProduct: (obj) => dispatch({type: actionTypes.updateProduct,payload:obj}),
+        addProduct: (obj) => dispatch({type: actionTypes.addToCart,payload:obj})
     }
 }
 export default connect(

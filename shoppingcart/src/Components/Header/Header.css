@@ -1,0 +1,19 @@
+.navbar.cart{
+    justify-content: flex-end;
+}
+.cartNotification{
+    position: relative;
+    left: 1px;
+    top: -1px;
+    padding: 4px;
+    border-radius: 14px;
+    background-color: red;
+    padding-right: 6px;
+    padding-left: 7px;
+}
+.cartnumber{
+    font-size: 15px;
+    position: relative;
+    top: 0px;
+    left: -2px;
+}
