@@ -21,7 +21,11 @@ class Cart extends Component {
     remove(element) {
         element.itemCount = element.itemCount - 1;
         element.itemLeft = element.itemLeft + 1;
-        this.props.addProduct(element);
+        this.props.updateProduct({
+            catagory: element.catagory.toLowerCase(),
+            product: element
+        });
+        this.props.updateCart(element);
     }
     render() {
         console.log("[inside cart]", this.props.cartDetails);
@@ -48,7 +52,7 @@ class Cart extends Component {
                                     <span className="col-md-2 content">
                                         <button className="btn btn-success" onClick={() => this.add(Element)}>+</button>
                                         <span style={{ "padding": "12px" }}>{Element.itemCount}</span>
-                                        <button className="btn btn-warning" onClick={() => this.remove(Element)}>-</button>
+                                        <button className="btn btn-warning" id = {Element.itemCount <= 0?'disableremove':''} onClick={() => this.remove(Element)}>-</button>
                                     </span>
                                     <span className="col-md-2 content">{Element.Price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
                                 </div>
@@ -68,8 +72,8 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addProduct: (obj) => dispatch({ type: actionTypes.addToCart, payload: obj }),
         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
+        removeCart: (obj) => dispatch({ type: actionTypes.removeCart, payload: obj }),
         updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj })
     }
 }

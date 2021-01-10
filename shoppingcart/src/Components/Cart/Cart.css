@@ -8,3 +8,8 @@ border: 1px solid #dddddd;
     height: 173px;
     width: 100%;
 }
+#disableremove{
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #c0c3c5;
+}

@@ -91,6 +91,7 @@ class ProductList extends Component {
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.name}</label></span>
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.catagory}</label></span>
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.Price + " " + this.CS.getDenomination(element.Denaminamtion)}</label></span>
+                                        <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}><label>{element.itemLeft}</label></span>
                                         <span style={{ display: "block", 'paddingLeft': '21px', 'paddingTop': '5px' }}>
                                             {
                                                 element.cartAdded ?
