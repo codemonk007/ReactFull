@@ -1,27 +1,27 @@
-import React from 'react'; 
+import React from 'react';
 import './modal.css';
 import { connect } from 'react-redux';
 
 const Modal = ({ handleClose, productDetails, show }) => {
-    const showHideClassName = show ? 'displayblock' :'displaynone';
+  const showHideClassName = show ? 'displayblock' : 'displaynone';
   console.log("Hello");
-  console.log(productDetails);      
-  if(productDetails){
+  console.log(productDetails);
+  if (productDetails) {
     return (
       <div id='modal' className={showHideClassName}>
         <section id='modalmain' className='modalmain'>
           <div>
             <div className="padding-left margin-bottom-15">
-              <img style={{width:'28em'}} src={productDetails.imageurl}/>
+              <img style={{ width: '28em' }} src={productDetails.imageurl} alt="no property" />
             </div>
             <div className="padding-left">
-            <label>Product Name : </label><strong>{productDetails.name}</strong>
+              <label>Product Name : </label><strong>{productDetails.name}</strong>
             </div>
             <div className="padding-left">
-            <label>Product Catagory : </label><strong>{productDetails.catagory}</strong>
+              <label>Product Catagory : </label><strong>{productDetails.catagory}</strong>
             </div>
             <div className="padding-left">
-            <label>Product Price : </label><strong>{productDetails.Price}</strong>
+              <label>Product Price : </label><strong>{productDetails.Price}</strong>
             </div>
             <button className="btn btn-danger buttonDetails" onClick={handleClose}>Close</button>
             <button className="btn btn-success buttonDetails" onClick={handleClose}>Add</button>
@@ -29,14 +29,14 @@ const Modal = ({ handleClose, productDetails, show }) => {
         </section>
       </div>
     );
-  }  
+  }
   return null;
+};
+function mapStateToProps(state) {
+  console.log("[Modal]", state);
+  return {
+    productDetails: state.productDetails
   };
-  function mapStateToProps(state) {
-    console.log("[Modal]", state);
-    return {
-      productDetails: state.productDetails
-    };
 }
 export default connect(
   mapStateToProps)(Modal);

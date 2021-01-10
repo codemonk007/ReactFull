@@ -1,0 +1,10 @@
+.cartProduct{
+border: 1px solid #dddddd;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 173px;
+    width: 100%;
+}

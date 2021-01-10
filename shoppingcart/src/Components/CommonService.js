@@ -1,6 +1,6 @@
-class CommonService{
+class CommonService {
 
-    getDenomination(denom){
+    getDenomination(denom) {
         switch (denom) {
             case "American":
                 return "$"
