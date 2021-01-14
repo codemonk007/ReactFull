@@ -3,10 +3,23 @@ import { connect } from 'react-redux';
 import './Cart.css';
 import commonService from './../CommonService';
 import * as actionTypes from './../../redux/Constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus, faHeart, faInfo, faTrash } from '@fortawesome/fontawesome-free-solid';
+import PopupModal from './../Popup/PopUpModal';
 class Cart extends Component {
+    
     constructor(props) {
         super(props);
         this.CS = new commonService();
+    }
+    state ={
+        showmodal:false    
+    }
+    hideModal = () => {
+        console.log(this);        
+        this.setState(
+            {...this.state,showmodal:false},
+            () => console.log(this.state))
     }
     add(element) {
         element.itemCount = element.itemCount + 1;
@@ -27,9 +40,28 @@ class Cart extends Component {
         });
         this.props.updateCart(element);
     }
+    removeCart(element){
+        element.cartAdded= false;
+        element.itemLeft = element.itemLeft+element.itemCount;
+        element.itemCount =0;
+        this.props.updateProduct({
+            catagory: element.catagory.toLowerCase(),
+            product: element
+        });
+        this.props.removeCart(element);
+    }
+
+    checkout(){      
+        this.setState(
+            {...this.state,showmodal:true},
+            () => console.log(this.state))
+    }
     render() {
         console.log("[inside cart]", this.props.cartDetails);
-        return (<div>
+        return (
+            // show={this.state.show} handleClose={this.hideModal}
+        <div>
+             <PopupModal show={this.state.showmodal} handleClose={this.hideModal}/>
             <div style={{ "textAlign": "center" }}>Cart Details</div>
             <div className="border border-primary">
                 <div>
@@ -52,13 +84,20 @@ class Cart extends Component {
                                     <span className="col-md-2 content">
                                         <button className="btn btn-success" onClick={() => this.add(Element)}>+</button>
                                         <span style={{ "padding": "12px" }}>{Element.itemCount}</span>
-                                        <button className="btn btn-warning" id = {Element.itemCount <= 0?'disableremove':''} onClick={() => this.remove(Element)}>-</button>
+                                        <button className="btn btn-warning" id={Element.itemCount <= 0 ? 'disableremove' : ''} onClick={() => this.remove(Element)}>-</button>
+                                        <button className="btn btn-danger deleteButton" id={Element.itemCount <= 0 ? 'disableTrash' : ''} onClick={() => this.removeCart(Element)}><FontAwesomeIcon icon={faTrash} /></button>
                                     </span>
                                     <span className="col-md-2 content">{Element.Price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
                                 </div>
+
                             </div>
                         })
                     }
+                </div>
+                <div>
+                    <button className="btn btn-danger" 
+                    onClick={() => this.checkout()}
+                    style={{"float":"right","float": "right","position": "relative","left": "-23px","top": "21px"}}>Check Out</button>
                 </div>
             </div>
         </div>)
@@ -73,7 +112,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
     return {
         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
-        removeCart: (obj) => dispatch({ type: actionTypes.removeCart, payload: obj }),
+        removeCart: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
         updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj })
     }
 }

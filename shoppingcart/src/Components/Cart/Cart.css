@@ -13,3 +13,11 @@ border: 1px solid #dddddd;
     pointer-events: none;
     background: #c0c3c5;
 }
+#disableTrash{
+    display: none;
+}
+
+.deleteButton{
+    position: relative;
+    left: 54px;
+}

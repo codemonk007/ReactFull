@@ -6,12 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.css'
 
 class Header extends Component {
+
+  
   render() {
     let temp = this.props.cartDetails.filter(element => {
       return element.cartAdded
     })
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className=" header navbar navbar-expand-md navbar-dark bg-dark" id="myHeader">
         <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">

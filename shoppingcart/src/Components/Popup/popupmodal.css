@@ -1,0 +1,56 @@
+
+.modalmain {
+    position: fixed;
+      background: white;
+      width: 31%;
+      height: auto;
+      top: 44%;
+      padding: 8px;
+      left: 51%;
+      -ms-transform: translate(-50%,-49%);
+      transform: translate(-50%,-49%);
+      }
+    
+    .displayblock {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width:100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+    }
+    
+    .displaynone {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width:100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  .padding-left{
+    padding-left: 51px;
+  }
+  .marginleft{
+    margin-left: 76%
+  }
+  pre{
+    margin-top: 14px;
+      margin-bottom: 1rem;
+      overflow: auto;
+  }
+  .margin-bottom-15{
+    margin-bottom: 15px;
+  }
+  .buttonDetails{
+    float: right;
+  }
+  .padd{
+    padding-top: 47px !important;
+    padding-left: 41px !important;
+    padding-bottom: 22px !important;
+    padding-right: 20px !important;
+  }
