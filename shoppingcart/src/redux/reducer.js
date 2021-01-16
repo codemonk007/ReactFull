@@ -221,7 +221,8 @@ const initialState = {
             }
         ]
     },
-    cartDetails: []
+    cartDetails: [],
+    orderDetails:[]
 }
 const reducer = (state = initialState, action) => {
 
@@ -265,6 +266,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartDetails: [...cart]
+            }
+        case actiontypes.orderItems:
+            console.log("[inside] orderItems",state);
+            let orderItems= [...state.orderDetails,action.payload]
+            return {
+                ...state,
+                cartDetails:[],
+                orderDetails: [...orderItems]
             }
         default:
             return { ...state }

@@ -4,3 +4,4 @@ export const updateProduct="updateProduct";
 export const addToCart="addToCart";
 export const updateCart="updateCart";
 export const RemoveFromCart="RemoveFromCart";
+export const orderItems="Order Items";

@@ -22,6 +22,10 @@ class Header extends Component {
             <li className="nav-item">
               <Link to="/productlist" className="nav-link">Product List</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/orderSummary" className="nav-link">Order Summary</Link>
+            </li>
+            
           </ul>
         </div>
         <div className="mx-auto order-0">

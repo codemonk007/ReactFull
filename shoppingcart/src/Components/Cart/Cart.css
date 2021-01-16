@@ -21,3 +21,11 @@ border: 1px solid #dddddd;
     position: relative;
     left: 54px;
 }
+.noCart{
+    text-align: center;
+    position: relative;
+    top: 134px;
+    left: 12px;
+    font-weight: 600;
+    font-size: 26px;
+}

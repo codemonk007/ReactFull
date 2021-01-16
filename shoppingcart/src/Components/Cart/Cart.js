@@ -15,6 +15,27 @@ class Cart extends Component {
     state ={
         showmodal:false    
     }
+    handleOrder = () => {
+        console.log("[Order] in place");
+        let orderObject ={};
+        orderObject.orderTime = new Date();
+        orderObject.transcationId = Math.floor(Math.random() * 10);
+        orderObject.status = 'in-progress';  
+        orderObject.orderDetails = this.props.cartDetails;
+        this.props.order(orderObject);
+        this.props.cartDetails.forEach(element => {
+        console.log("[element]",element);
+        element.cartAdded= false;   
+        this.props.updateProduct({
+            catagory: element.catagory.toLowerCase(),
+            product: element
+        });     
+        });
+        this.setState(
+            {...this.state,showmodal:false},
+            () => console.log(this.state)) 
+        console.log("[productDetails]",this.props.productDetails);        
+    }
     hideModal = () => {
         console.log(this);        
         this.setState(
@@ -61,59 +82,67 @@ class Cart extends Component {
         return (
             // show={this.state.show} handleClose={this.hideModal}
         <div>
-             <PopupModal show={this.state.showmodal} handleClose={this.hideModal}/>
+             <PopupModal show={this.state.showmodal} handleOrder={this.handleOrder} handleClose={this.hideModal}/>
             <div style={{ "textAlign": "center" }}>Cart Details</div>
+            {this.props.cartDetails.length >0 ? 
             <div className="border border-primary">
-                <div>
-                    <div className="row" style={{ "height": "107px" }}>
-                        <span className="col-md-2"></span>
-                        <span className="col-md-2 content" ><strong>Name</strong></span>
-                        <span className="col-md-2 content"><strong>Catagory</strong></span>
-                        <span className="col-md-2 content"><strong>Price</strong></span>
-                        <span className="col-md-2 content"></span>
-                        <span className="col-md-2 content"><strong>Total</strong></span>
-                    </div>
-                    {
-                        this.props.cartDetails.map(Element => {
-                            return <div className="cartProduct" key={Element.id}>
-                                <div className="row">
-                                    <span className="col-md-2"><img style={{ height: '12em', "width": "12em" }} src={Element.imageurl} alt="no property" /></span>
-                                    <span className="col-md-2 content" >{Element.name}</span>
-                                    <span className="col-md-2 content">{Element.catagory}</span>
-                                    <span className="col-md-2 content">{Element.Price}</span>
-                                    <span className="col-md-2 content">
-                                        <button className="btn btn-success" onClick={() => this.add(Element)}>+</button>
-                                        <span style={{ "padding": "12px" }}>{Element.itemCount}</span>
-                                        <button className="btn btn-warning" id={Element.itemCount <= 0 ? 'disableremove' : ''} onClick={() => this.remove(Element)}>-</button>
-                                        <button className="btn btn-danger deleteButton" id={Element.itemCount <= 0 ? 'disableTrash' : ''} onClick={() => this.removeCart(Element)}><FontAwesomeIcon icon={faTrash} /></button>
-                                    </span>
-                                    <span className="col-md-2 content">{Element.Price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
-                                </div>
-
+            <div>
+                <div className="row" style={{ "height": "107px" }}>
+                    <span className="col-md-2"></span>
+                    <span className="col-md-2 content" ><strong>Name</strong></span>
+                    <span className="col-md-2 content"><strong>Catagory</strong></span>
+                    <span className="col-md-2 content"><strong>Price</strong></span>
+                    <span className="col-md-2 content"></span>
+                    <span className="col-md-2 content"><strong>Total</strong></span>
+                </div>
+                {
+                    this.props.cartDetails.map(Element => {
+                        return <div className="cartProduct" key={Element.id}>
+                            <div className="row">
+                                <span className="col-md-2"><img style={{ height: '12em', "width": "12em" }} src={Element.imageurl} alt="no property" /></span>
+                                <span className="col-md-2 content" >{Element.name}</span>
+                                <span className="col-md-2 content">{Element.catagory}</span>
+                                <span className="col-md-2 content">{Element.Price}</span>
+                                <span className="col-md-2 content">
+                                    <button className="btn btn-success" onClick={() => this.add(Element)}>+</button>
+                                    <span style={{ "padding": "12px" }}>{Element.itemCount}</span>
+                                    <button className="btn btn-warning" id={Element.itemCount <= 0 ? 'disableremove' : ''} onClick={() => this.remove(Element)}>-</button>
+                                    <button className="btn btn-danger deleteButton" id={Element.itemCount <= 0 ? 'disableTrash' : ''} onClick={() => this.removeCart(Element)}><FontAwesomeIcon icon={faTrash} /></button>
+                                </span>
+                                <span className="col-md-2 content">{Element.Price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
                             </div>
-                        })
-                    }
-                </div>
-                <div>
-                    <button className="btn btn-danger" 
-                    onClick={() => this.checkout()}
-                    style={{"float":"right","float": "right","position": "relative","left": "-23px","top": "21px"}}>Check Out</button>
-                </div>
+
+                        </div>
+                    })
+                }
             </div>
-        </div>)
+            <div>
+                <button className="btn btn-danger" 
+                onClick={() => this.checkout()}
+                style={{"float":"right","float": "right","position": "relative","left": "-23px","top": "21px"}}>Check Out</button>
+            </div>
+        </div>
+        :
+        <div className="noCart">No Items are added to Cart</div>
+        }
+        </div>
+        
+        )
     }
 }
 function mapStateToProps(state) {
     console.log("[Cart Details]", state);
     return {
-        cartDetails: [...state.cartDetails]
+        cartDetails: [...state.cartDetails],
+        productDetails:{...state.product}
     };
 }
 const mapDispatchToProps = dispatch => {
     return {
         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
         removeCart: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
-        updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj })
+        updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj }),
+        order:(obj) =>dispatch({ type: actionTypes.orderItems, payload: obj })
     }
 }
 export default connect(

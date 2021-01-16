@@ -13,7 +13,7 @@ class PopupModal extends Component {
                     <section id='modalmain' className='modalmain padd'>
                         are you sure you want to proceed the order to checkout ?
            <div style={{ float: "right" }}>
-                            <button className="btn btn-success">order</button>
+                            <button className="btn btn-success" onClick={this.props.handleOrder}>order</button>
                             <button className="btn btn-secondary" onClick={this.props.handleClose}>close</button>
                         </div>
                     </section>
