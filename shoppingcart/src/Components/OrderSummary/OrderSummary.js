@@ -3,7 +3,17 @@ import { connect } from 'react-redux';
 import './OrderSummary.css';
 import ItemDetail from './ItermDetail';
 class OrderSummary extends Component {
-
+    state ={
+        showDetails:[]
+    }
+    showDetails(element){
+        this.state.showDetails = {"catagory":element.catagory,"showDetails":true,"details":element.orderDetails};
+        this.setState({...this.state});
+    }
+    hideDetails(element){
+        this.state.showDetails = {"catagory":element.catagory,"showDetails":false,"details":element.orderDetails};
+        this.setState({...this.state});
+    }
     render() {
         console.log("[orderDetails]", this.props.orderDetails);
         return (
@@ -26,10 +36,11 @@ class OrderSummary extends Component {
                                     <td>{element.orderTime.toString()}</td>
                                     <td>{element.status}</td>
                                     <td>
-                                        <button className="btn btn-warning">check Details</button>
+                                        <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
+                                        <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>check Details</button>
                                     </td>
                                 </tr>
-                                <ItemDetail></ItemDetail>
+                                <React.Fragment><ItemDetail details={this.state.showDetails}></ItemDetail></React.Fragment>
                             </React.Fragment>
                         })
                     }
