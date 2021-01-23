@@ -14,6 +14,9 @@ class OrderSummary extends Component {
         this.state.showDetails = {"catagory":element.catagory,"showDetails":false,"details":element.orderDetails};
         this.setState({...this.state});
     }
+    getbuttondecider(item){
+
+    }
     render() {
         console.log("[orderDetails]", this.props.orderDetails);
         return (
@@ -36,8 +39,11 @@ class OrderSummary extends Component {
                                     <td>{element.orderTime.toString()}</td>
                                     <td>{element.status}</td>
                                     <td>
-                                        <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
+                                    <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
                                         <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>check Details</button>
+                                        {/* {this.getbuttondecider(element)?<button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>:
+                                        <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>check Details</button> */}
+                                    {/* } */}
                                     </td>
                                 </tr>
                                 <React.Fragment><ItemDetail details={this.state.showDetails}></ItemDetail></React.Fragment>
