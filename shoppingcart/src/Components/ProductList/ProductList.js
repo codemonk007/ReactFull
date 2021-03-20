@@ -18,6 +18,8 @@ class ProductList extends Component {
     componentDidMount() {
         console.log("Hi-->");
         this.props.InitialProductDetails(getProductData);
+        console.log("Hi New----",this.props);
+        
       }
     templteStyle = {
         'textAlign': 'center',
@@ -62,6 +64,8 @@ class ProductList extends Component {
                 catagory: outerelement,
                 product: element
             });
+            console.log("ProductAddToCart",element);
+            
             this.props.addProduct(element);
         }
     }

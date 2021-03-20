@@ -1,6 +1,7 @@
 import updateInitialState from './states/updateInitialState';
-import axios from 'axios';
+import * as actiontypes from './../redux-Store/Constants';
 
+import axios from 'axios';
  const getProductData = () => {
    console.log("Hi Hello");
    

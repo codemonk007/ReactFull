@@ -228,6 +228,8 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case actiontypes.productList:
+            console.log("hhhh");
+            
             return {
                 ...state,
                 initialState
@@ -276,9 +278,11 @@ const reducer = (state = initialState, action) => {
                 orderDetails: [...orderItems]
             }
         case actiontypes.getProductInitialState:
+            console.log("in reducer",action.payload);
+            
             return {
                 ...state,
-                product:action.payload.product,
+                product:action.payload,
                 cartDetails: [],
                 orderDetails:[]
             }
