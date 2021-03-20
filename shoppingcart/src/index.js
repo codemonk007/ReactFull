@@ -5,9 +5,7 @@ import './index.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.min.css';
 import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux';
-import reducer from './redux/reducer';
-const store = createStore(reducer);
+import store from './redux-Store/store';
 import { Provider } from 'react-redux';
 ReactDOM.render(
   <Provider store={store}>

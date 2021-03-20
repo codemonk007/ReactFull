@@ -1,31 +1,31 @@
 .cartProduct{
-border: 1px solid #dddddd;
-}
-.content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 173px;
-    width: 100%;
-}
-#disableremove{
-    cursor: not-allowed;
-    pointer-events: none;
-    background: #c0c3c5;
-}
-#disableTrash{
-    display: none;
-}
-
-.deleteButton{
-    position: relative;
-    left: 54px;
-}
-.noCart{
-    text-align: center;
-    position: relative;
-    top: 134px;
-    left: 12px;
-    font-weight: 600;
-    font-size: 26px;
-}
+    border: 1px solid #dddddd;
+    }
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 173px;
+        width: 100%;
+    }
+    #disableremove{
+        cursor: not-allowed;
+        pointer-events: none;
+        background: #c0c3c5;
+    }
+    #disableTrash{
+        display: none;
+    }
+    
+    .deleteButton{
+        position: relative;
+        left: 54px;
+    }
+    .noCart{
+        text-align: center;
+        position: relative;
+        top: 134px;
+        left: 12px;
+        font-weight: 600;
+        font-size: 26px;
+    }

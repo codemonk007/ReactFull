@@ -249,7 +249,7 @@ const reducer = (state = initialState, action) => {
             return { ...state }
         case actiontypes.RemoveFromCart:
             console.log(state);
-            let cartDetails = state.cartDetails.filter(element => element.id != action.payload.id)
+            let cartDetails = state.cartDetails.filter(element => element.id !== action.payload.id)
             return { ...state, cartDetails: [...cartDetails] }
         case actiontypes.addToCart:
             return {
@@ -274,6 +274,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 cartDetails:[],
                 orderDetails: [...orderItems]
+            }
+        case actiontypes.getProductInitialState:
+            return {
+                ...state,
+                product:action.payload.product,
+                cartDetails: [],
+                orderDetails:[]
             }
         default:
             return { ...state }

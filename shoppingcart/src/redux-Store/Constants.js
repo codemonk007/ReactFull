@@ -5,3 +5,4 @@ export const addToCart="addToCart";
 export const updateCart="updateCart";
 export const RemoveFromCart="RemoveFromCart";
 export const orderItems="Order Items";
+export const getProductInitialState="Product Initial State";

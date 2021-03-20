@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css';
 import commonService from './../CommonService';
-import * as actionTypes from './../../redux/Constants';
+import * as actionTypes from './../../redux-Store/Constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus, faHeart, faInfo, faTrash } from '@fortawesome/fontawesome-free-solid';
+import {faTrash } from '@fortawesome/fontawesome-free-solid';
 import PopupModal from './../Popup/PopUpModal';
 class Cart extends Component {
     

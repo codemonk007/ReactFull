@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart, faInfo, faTrash } from '@fortawesome/fontawesome-free-solid';
 import commonService from './../CommonService';
 import Modal from './../Modal/modal';
-import * as actionTypes from './../../redux/Constants';
+import * as actionTypes from './../../redux-Store/Constants';
+import getProductData from '../../API_Calls/productHelper';
 class ProductList extends Component {
     state = {
         show: false
@@ -14,6 +15,10 @@ class ProductList extends Component {
         super(props);
         this.CS = new commonService();
     }
+    componentDidMount() {
+        console.log("Hi-->");
+        this.props.InitialProductDetails(getProductData);
+      }
     templteStyle = {
         'textAlign': 'center',
         'fontSize': '24px',
@@ -50,9 +55,9 @@ class ProductList extends Component {
     ProductAddToCart(outerelement, element) {
         console.log("[PRODUCT]", element);
         element.cartAdded = true;
-        element.itemCount = element.itemCount + 1;
-        element.itemLeft = element.itemLeft - 1;
-        if (this.getIndex(element) == -1) {
+        element.itemCount += element.itemCount;
+        element.itemLeft -= element.itemLeft;
+        if (this.getIndex(element) === -1) {
             this.props.updateProduct({
                 catagory: outerelement,
                 product: element
@@ -63,8 +68,8 @@ class ProductList extends Component {
     ProductRemoveFromCart(outerelement, element) {
         console.log("[PRODUCT REMOVE FROM CART]", element);
         element.cartAdded = false;
-        element.itemCount = element.itemCount - 1;
-        element.itemLeft = element.itemLeft + 1;
+        element.itemCount -= element.itemCount;
+        element.itemLeft += element.itemLeft;
         this.props.RemoveProduct(element);
         // if(this.getIndex(element) == -1){
         //     this.props.updateProduct({
@@ -126,7 +131,8 @@ const mapDispatchToProps = dispatch => {
         ProductDetails: (obj) => dispatch({ type: actionTypes.productDetails, productDetails: obj }),
         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
         addProduct: (obj) => dispatch({ type: actionTypes.addToCart, payload: obj }),
-        RemoveProduct: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj })
+        RemoveProduct: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
+        InitialProductDetails:(obj) =>dispatch(obj()),
     }
 }
 export default connect(
