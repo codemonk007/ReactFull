@@ -7,6 +7,7 @@ import commonService from './../CommonService';
 import Modal from './../Modal/modal';
 import * as actionTypes from './../../redux-Store/Constants';
 import getProductData from '../../API_Calls/productHelper';
+import addCartData from './../../API_Calls/cartHelper';
 class ProductList extends Component {
     state = {
         show: false
@@ -54,11 +55,12 @@ class ProductList extends Component {
         }
         return -1;
     }
-    ProductAddToCart(outerelement, element) {
+     async ProductAddToCart(outerelement, element) {
         console.log("[PRODUCT]", element);
         element.cartAdded = true;
-        element.itemCount += element.itemCount;
-        element.itemLeft -= element.itemLeft;
+        element.itemCount += 1;
+        element.itemLeft -= 1;
+               
         if (this.getIndex(element) === -1) {
             this.props.updateProduct({
                 catagory: outerelement,
@@ -67,6 +69,10 @@ class ProductList extends Component {
             console.log("ProductAddToCart",element);
             
             this.props.addProduct(element);
+            let response =  await addCartData(element);           
+            setTimeout(() => {
+                console.log("response from productList",response);
+            }, 1000);
         }
     }
     ProductRemoveFromCart(outerelement, element) {
@@ -94,6 +100,7 @@ class ProductList extends Component {
                         return <div key={i} className="outerLayer">
                             <div key={i} style={this.templteStyle}><strong>{outerelement}</strong></div>
                             {this.props.product[`${outerelement}`].map((element) => {
+                                console.log(element.id);                                
                                 return (
                                     <span className="productInd" key={element.id}>
                                         <img className="product" style={{ height: '20em' }} key={element.id} src={element.imageurl} alt="no property" />
@@ -137,6 +144,7 @@ const mapDispatchToProps = dispatch => {
         addProduct: (obj) => dispatch({ type: actionTypes.addToCart, payload: obj }),
         RemoveProduct: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
         InitialProductDetails:(obj) =>dispatch(obj()),
+        addToCartAPI:(obj) =>{console.log(obj);dispatch(obj())}
     }
 }
 export default connect(
