@@ -7,6 +7,7 @@ import ProductList from './Components/ProductList/ProductList';
 import './App.css';
 import Footer from './Components/Footer/Footer';
 import orderSummary from './Components/OrderSummary/OrderSummary';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   render() {

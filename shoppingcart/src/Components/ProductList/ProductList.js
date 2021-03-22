@@ -8,6 +8,7 @@ import Modal from './../Modal/modal';
 import * as actionTypes from './../../redux-Store/Constants';
 import getProductData from '../../API_Calls/productHelper';
 import addCartData from './../../API_Calls/cartHelper';
+import { toast,ToastContainer } from 'react-toastify';
 class ProductList extends Component {
     state = {
         show: false
@@ -72,6 +73,7 @@ class ProductList extends Component {
             let response =  await addCartData(element);           
             setTimeout(() => {
                 console.log("response from productList",response);
+                toast("added to Cart Successfully!")
             }, 1000);
         }
     }
@@ -95,6 +97,7 @@ class ProductList extends Component {
         return (
             <div>
                 <Modal show={this.state.show} handleClose={this.hideModal} />
+                <ToastContainer />
                 {
                     types.map((outerelement, i) => {
                         return <div key={i} className="outerLayer">
