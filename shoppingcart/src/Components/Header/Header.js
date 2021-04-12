@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { faCartPlus } from '@fortawesome/fontawesome-free-solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Header.css'
+import {getCartData} from './../../API_Calls/cartHelper';
+import './Header.css';
 
 class Header extends Component {
 
+  componentDidMount() {
+    console.log("get Initial Product Details-->");
+    this.props.InitialCartDetails(getCartData);        
+  }
   
   render() {
-    let temp = this.props.cartDetails.filter(element => {
+    let cartLength = this.props.cartDetails.filter(element => {
       return element.cartAdded
     })
     return (
@@ -39,7 +44,7 @@ class Header extends Component {
             <li className="nav-item">
               <Link to="/cart" className="nav-link justify-content-end"><FontAwesomeIcon style={{ "fontSize": '20px' }} icon={faCartPlus} />
                 {
-                  temp.length > 0 ?
+                  cartLength.length > 0 ?
                     <span className="cartNotification"><span className="cartnumber">{this.props.cartDetails.length}</span></span> : ''
                 }
               </Link>
@@ -56,6 +61,10 @@ function mapStateToProps(state) {
     cartDetails: [...state.cartDetails]
   };
 }
-
+const mapDispatchToProps = dispatch => {
+  return {
+    InitialCartDetails:(obj) => dispatch(obj())
+  }
+}
 export default connect(
-  mapStateToProps)(Header);
+  mapStateToProps, mapDispatchToProps)(Header);

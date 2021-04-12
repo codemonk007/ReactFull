@@ -258,6 +258,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 cartDetails: [...state.cartDetails, action.payload]
             }
+        case actiontypes.initializeCart:
+            console.log("action.payload--->",action.payload);
+            
+            return {
+                ...state,
+                cartDetails: [...action.payload]
+            }
         case actiontypes.updateCart:
             let cart = state.cartDetails;
             for (let k = 0; k < cart.length; k++) {
@@ -277,13 +284,18 @@ const reducer = (state = initialState, action) => {
                 cartDetails:[],
                 orderDetails: [...orderItems]
             }
+        case actiontypes.orderItemsinitialState:
+            console.log("[inside] orderItems",state);
+            return {
+                ...state,
+                orderDetails: [...action.payload]
+            }
         case actiontypes.getProductInitialState:
             console.log("in reducer",action.payload);
             
             return {
                 ...state,
                 product:action.payload,
-                cartDetails: [],
                 orderDetails:[]
             }
         default:

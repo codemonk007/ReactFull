@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './OrderSummary.css';
 import ItemDetail from './ItermDetail';
+import {getOrderData} from './../../API_Calls/orderHelper';
 class OrderSummary extends Component {
     state ={
-        showDetails:[]
+        showDetails:[],
+        orderObj:{}
     }
+      componentDidMount() {
+        this.props.getOrderDetails(getOrderData);        
+      }
     showDetails(element){
-        this.state.showDetails = {"catagory":element.catagory,"showDetails":true,"details":element.orderDetails};
+        this.state.orderObj[`${element.id}`] = true;
+        this.state.showDetails = {"catagory":element.catagory,"showDetails":true,"details":element.orderDetails};        
         this.setState({...this.state});
     }
     hideDetails(element){
+        this.state.orderObj[`${element.id}`] = false;
         this.state.showDetails = {"catagory":element.catagory,"showDetails":false,"details":element.orderDetails};
         this.setState({...this.state});
-    }
-    getbuttondecider(item){
-
     }
     render() {
         console.log("[orderDetails]", this.props.orderDetails);
@@ -32,21 +36,28 @@ class OrderSummary extends Component {
                 <tbody>
                     {
                         this.props.orderDetails.map((element, i) => {
-                            return <React.Fragment key={element.transcationId}>
-                                <tr key={element.transcationId}>
+                            return <React.Fragment key={element.id}>
+                                <tr key={element.id}>
                                     <td>{i + 1}</td>
-                                    <td>{element.transcationId}</td>
+                                    <td>{element.id}</td>
                                     <td>{element.orderTime.toString()}</td>
                                     <td>{element.status}</td>
                                     <td>
-                                    <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
-                                        <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>check Details</button>
-                                        {/* {this.getbuttondecider(element)?<button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>:
-                                        <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>check Details</button> */}
-                                    {/* } */}
+                                        {
+                                            this.state.orderObj[`${element.id}`]?
+                                            <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>hide Details</button>:
+                                            <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
+                                        }
                                     </td>
                                 </tr>
-                                <React.Fragment><ItemDetail details={this.state.showDetails}></ItemDetail></React.Fragment>
+                                <React.Fragment>
+                                {
+                                    this.state.orderObj[`${element.id}`]?
+                                    <ItemDetail details={this.state.showDetails}></ItemDetail>
+                                    :null
+                                }
+                                </React.Fragment>
+                               
                             </React.Fragment>
                         })
                     }
@@ -56,18 +67,15 @@ class OrderSummary extends Component {
     }
 }
 function mapStateToProps(state) {
-    console.log("[Order Summary]", state.orderDetails);
+    console.log("[Order Summary]", state.orderDetails);    
     return {
         orderDetails: [...state.orderDetails]
     };
 }
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         ProductDetails: (obj) => dispatch({ type: actionTypes.productDetails, productDetails: obj }),
-//         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
-//         addProduct: (obj) => dispatch({ type: actionTypes.addToCart, payload: obj }),
-//         RemoveProduct: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj })
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        getOrderDetails: (obj) => dispatch(obj())
+    }
+}
 export default connect(
-    mapStateToProps)(OrderSummary);
+    mapStateToProps,mapDispatchToProps)(OrderSummary);

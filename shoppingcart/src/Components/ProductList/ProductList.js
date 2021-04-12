@@ -7,8 +7,9 @@ import commonService from './../CommonService';
 import Modal from './../Modal/modal';
 import * as actionTypes from './../../redux-Store/Constants';
 import getProductData from '../../API_Calls/productHelper';
-import addCartData from './../../API_Calls/cartHelper';
+import {addCartData,removeCartData} from './../../API_Calls/cartHelper';
 import { toast,ToastContainer } from 'react-toastify';
+import GlobalSettings from './../../Config/settings';
 class ProductList extends Component {
     state = {
         show: false
@@ -61,35 +62,35 @@ class ProductList extends Component {
         element.cartAdded = true;
         element.itemCount += 1;
         element.itemLeft -= 1;
-               
-        if (this.getIndex(element) === -1) {
-            this.props.updateProduct({
-                catagory: outerelement,
-                product: element
-            });
-            console.log("ProductAddToCart",element);
-            
-            this.props.addProduct(element);
             let response =  await addCartData(element);           
             setTimeout(() => {
                 console.log("response from productList",response);
-                toast("added to Cart Successfully!")
+                if(response.status === GlobalSettings.status.update){
+                    if (this.getIndex(element) === -1) {
+                        this.props.updateProduct({
+                            catagory: outerelement,
+                            product: element
+                        });
+                    }
+                    this.props.addProduct(element);
+                    toast.success("Added to Cart Successfully!")
+                }
             }, 1000);
-        }
     }
-    ProductRemoveFromCart(outerelement, element) {
+    async ProductRemoveFromCart(outerelement, element) {
         console.log("[PRODUCT REMOVE FROM CART]", element);
         element.cartAdded = false;
-        element.itemCount -= element.itemCount;
-        element.itemLeft += element.itemLeft;
-        this.props.RemoveProduct(element);
-        // if(this.getIndex(element) == -1){
-        //     this.props.updateProduct({
-        //         catagory:outerelement,
-        //         product:element
-        //     });
-        //     this.props.RemoveProduct(element);
-        // }
+        element.itemCount -= 1;
+        element.itemLeft += 1
+        let response =  await removeCartData(element);           
+            setTimeout(() => {
+                console.log("response",response);                
+                if(response.status === GlobalSettings.status.update){
+                    this.props.RemoveProduct(element);
+                    toast.warn("removed from Cart Successfully!")
+                }
+            }, 1000);
+
     }
     render() {
         let types = Object.keys(this.props.product);

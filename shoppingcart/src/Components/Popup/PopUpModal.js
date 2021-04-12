@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './popupmodal.css';
 class PopupModal extends Component {
      checkModal = this.props.show ?'displayblock' : 'displaynone';
@@ -24,4 +25,10 @@ class PopupModal extends Component {
         )
     }
 }
-export default PopupModal;
+const mapDispatchToProps = dispatch => {
+    return {
+        checkoutDetails:(obj) =>{dispatch(obj())}
+    }
+}
+export default connect(
+    null, mapDispatchToProps)(PopupModal);

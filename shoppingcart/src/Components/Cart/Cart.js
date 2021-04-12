@@ -6,6 +6,7 @@ import * as actionTypes from './../../redux-Store/Constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash } from '@fortawesome/fontawesome-free-solid';
 import PopupModal from './../Popup/PopUpModal';
+import {orderCheckout} from  './../../API_Calls/orderHelper'
 class Cart extends Component {
     
     constructor(props) {
@@ -15,6 +16,11 @@ class Cart extends Component {
     state ={
         showmodal:false    
     }
+
+    // componentDidMount() {
+    //     console.log("get Initial Product Details-->");
+    //     this.props.InitialCartDetails(getCartData);        
+    //   }
     handleOrder = () => {
         console.log("[Order] in place");
         let orderObject ={};
@@ -34,7 +40,8 @@ class Cart extends Component {
         this.setState(
             {...this.state,showmodal:false},
             () => console.log(this.state)) 
-        console.log("[productDetails]",this.props.productDetails);        
+        console.log("[productDetails]",this.props.productDetails);   
+        this.props.checkoutDetails(orderCheckout,orderObject);     
     }
     hideModal = () => {
         console.log(this);        
@@ -102,14 +109,14 @@ class Cart extends Component {
                                 <span className="col-md-2"><img style={{ height: '12em', "width": "12em" }} src={Element.imageurl} alt="no property" /></span>
                                 <span className="col-md-2 content" >{Element.name}</span>
                                 <span className="col-md-2 content">{Element.catagory}</span>
-                                <span className="col-md-2 content">{Element.Price}</span>
+                                <span className="col-md-2 content">{Element.price}</span>
                                 <span className="col-md-2 content">
                                     <button className="btn btn-success" onClick={() => this.add(Element)}>+</button>
                                     <span style={{ "padding": "12px" }}>{Element.itemCount}</span>
                                     <button className="btn btn-warning" id={Element.itemCount <= 0 ? 'disableremove' : ''} onClick={() => this.remove(Element)}>-</button>
                                     <button className="btn btn-danger deleteButton" id={Element.itemCount <= 0 ? 'disableTrash' : ''} onClick={() => this.removeCart(Element)}><FontAwesomeIcon icon={faTrash} /></button>
                                 </span>
-                                <span className="col-md-2 content">{Element.Price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
+                                <span className="col-md-2 content">{Element.price * Element.itemCount} {this.CS.getDenomination(Element.Denaminamtion)}</span>
                             </div>
 
                         </div>
@@ -142,7 +149,8 @@ const mapDispatchToProps = dispatch => {
         updateProduct: (obj) => dispatch({ type: actionTypes.updateProduct, payload: obj }),
         removeCart: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
         updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj }),
-        order:(obj) =>dispatch({ type: actionTypes.orderItems, payload: obj })
+        order:(obj) =>dispatch({ type: actionTypes.orderItems, payload: obj }),
+        checkoutDetails:(order,Obj) =>{dispatch(order(Obj))}
     }
 }
 export default connect(
