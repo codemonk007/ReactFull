@@ -4,7 +4,7 @@ const ItemDetail = (props) => {
 
     return (
         <React.Fragment>
-         <tr><th>image</th><th>name</th><th>catagory</th></tr>
+         <tr><th>image</th><th>name</th><th>catagory</th><th>item count</th><th>total price</th></tr>
             {
                 props.details.details.map(Element => {
                     return (
@@ -12,11 +12,13 @@ const ItemDetail = (props) => {
                             <React.Fragment key={Element.id}>
                                 <td style={{ "border": "none" }}>
                                     <img
-                                        style={{ "width": "25%", "height": "35%" }}
+                                        style={{ "width": "54%", "height": "35%" }}
                                         src={Element.imageurl} alt="No image"></img>
                                 </td>
                                 <td style={{ "border": "none" }}>{Element.name}</td>
                                 <td style={{ "border": "none" }}>{Element.catagory}</td>
+                                <td style={{ "border": "none" }}>{Element.itemCount}</td>
+                                <td style={{ "border": "none" }}>{Element.itemCount * Element.price}</td>
                             </React.Fragment>
                         </tr>
                     )

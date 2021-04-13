@@ -2,22 +2,17 @@ import axios from 'axios';
 import orderCheckoutState from './states/orderCheckoutState';
 import getOrderSummaryInitialState from './states/getOrderSummaryInitialState';
 
-const orderCheckout = (body) => { 
+async function orderCheckout(body){ 
     console.log("inside Order checkour",body);    
-    return dispatch => {
-      // dispatch(updateInitialState());
-      axios
-        .post(`http://localhost:8080/api/orderCheckout`,body)
-        .then(res => {
-        console.log(res.data);            
-          dispatch(orderCheckoutState(res.data));
-        })
-        .catch(err => {
-            console.log("inside exception");
-            dispatch(orderCheckoutState(err));            
-        });
-    };
-  };
+    try {
+      let res = await axios.post(`http://localhost:8080/api/orderCheckout`, body); 
+      return res
+
+  } catch (error) {
+      console.log("error");
+
+  }
+};
   const getOrderData = () => { 
     return dispatch => {
       // dispatch(updateInitialState());

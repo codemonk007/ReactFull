@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash } from '@fortawesome/fontawesome-free-solid';
 import PopupModal from './../Popup/PopUpModal';
 import {orderCheckout} from  './../../API_Calls/orderHelper'
+import { toast,ToastContainer } from 'react-toastify';
 class Cart extends Component {
     
     constructor(props) {
@@ -21,7 +22,7 @@ class Cart extends Component {
     //     console.log("get Initial Product Details-->");
     //     this.props.InitialCartDetails(getCartData);        
     //   }
-    handleOrder = () => {
+    async handleOrder(){
         console.log("[Order] in place");
         let orderObject ={};
         orderObject.orderTime = new Date();
@@ -40,8 +41,8 @@ class Cart extends Component {
         this.setState(
             {...this.state,showmodal:false},
             () => console.log(this.state)) 
-        console.log("[productDetails]",this.props.productDetails);   
-        this.props.checkoutDetails(orderCheckout,orderObject);     
+        let res = orderCheckout(orderObject);       
+        toast.success("Order Placed Successfully!")
     }
     hideModal = () => {
         console.log(this);        
@@ -89,7 +90,8 @@ class Cart extends Component {
         return (
             // show={this.state.show} handleClose={this.hideModal}
         <div>
-             <PopupModal show={this.state.showmodal} handleOrder={this.handleOrder} handleClose={this.hideModal}/>
+             <ToastContainer />
+             <PopupModal show={this.state.showmodal} handleOrder={() => this.handleOrder()} handleClose={this.hideModal}/>
             <div style={{ "textAlign": "center" }}>Cart Details</div>
             {this.props.cartDetails.length >0 ? 
             <div className="border border-primary">
@@ -150,7 +152,7 @@ const mapDispatchToProps = dispatch => {
         removeCart: (obj) => dispatch({ type: actionTypes.RemoveFromCart, payload: obj }),
         updateCart: (obj) => dispatch({ type: actionTypes.updateCart, payload: obj }),
         order:(obj) =>dispatch({ type: actionTypes.orderItems, payload: obj }),
-        checkoutDetails:(order,Obj) =>{dispatch(order(Obj))}
+        // checkoutDetails:(order,Obj) =>{dispatch(order(Obj))}
     }
 }
 export default connect(

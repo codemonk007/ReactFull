@@ -12,6 +12,17 @@ class Header extends Component {
     console.log("get Initial Product Details-->");
     this.props.InitialCartDetails(getCartData);        
   }
+  styleHandler(event){
+    let Links =  document.getElementsByClassName('nav-link');
+    [].forEach.call(Links, (element)=>{
+      if(event.target.innerHTML === element.innerHTML){
+        element.style.color = "white";
+      }
+      else{
+        element.style.color = "";
+      }
+    });
+  }
   
   render() {
     let cartLength = this.props.cartDetails.filter(element => {
@@ -21,14 +32,14 @@ class Header extends Component {
       <nav className=" header navbar navbar-expand-md navbar-dark bg-dark" id="myHeader">
         <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <Link to="/" className="nav-link">Home</Link>
+            <li className="nav-item">
+              <Link to="/" onClick={($event) => this.styleHandler($event)} className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/productlist" className="nav-link">Product List</Link>
+              <Link to="/productlist" onClick={($event) => this.styleHandler($event)} className="nav-link">Product List</Link>
             </li>
             <li className="nav-item">
-              <Link to="/orderSummary" className="nav-link">Order Summary</Link>
+              <Link to="/orderSummary" onClick={($event) => this.styleHandler($event)} className="nav-link">Order Summary</Link>
             </li>
             
           </ul>

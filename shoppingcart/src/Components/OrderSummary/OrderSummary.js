@@ -46,7 +46,7 @@ class OrderSummary extends Component {
                                         {
                                             this.state.orderObj[`${element.id}`]?
                                             <button className="btn btn-warning" onClick={()=>this.hideDetails(element)}>hide Details</button>:
-                                            <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>check Details</button>
+                                            <button className="btn btn-warning" onClick={()=>this.showDetails(element)}>Transaction Details</button>
                                         }
                                     </td>
                                 </tr>
