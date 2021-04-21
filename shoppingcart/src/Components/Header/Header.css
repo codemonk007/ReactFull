@@ -41,3 +41,6 @@
   .sticky + .content {
     padding-top: 102px;
   }
+  .globalSearch{
+    width: 35em;
+  }

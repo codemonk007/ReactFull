@@ -1,16 +1,10 @@
 import updateInitialState from './states/updateInitialState';
 import * as actiontypes from './../redux-Store/Constants';
-
-import axios from 'axios';
+import axios_instance from './../utils/axios';
  const getProductData = () => {
-   console.log("Hi Hello");
-   
     return dispatch => {
-      // dispatch(updateInitialState());
-      axios
-        .get(`http://localhost:8080/api/ProductList`)
+      axios_instance.get(`http://localhost:8080/api/ProductList`)
         .then(res => {
-        console.log(res.data);            
           dispatch(updateInitialState(res.data));
         })
         .catch(err => {

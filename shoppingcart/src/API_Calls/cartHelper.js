@@ -1,11 +1,8 @@
-import axios from 'axios';
 import updateCartInitialState from './states/getCartInitialState';
+import axios_instance from './../utils/axios';
 async function addCartData(body) {
-    console.log("request Body", body);
-
     try {
-        let res = await axios.post(`http://localhost:8080/api/addCartDetails`, body);
-        console.log("response--->",res.data);  
+        let res = await axios_instance.post(`http://localhost:8080/api/addCartDetails`, body); 
         return res
 
     } catch (error) {
@@ -15,12 +12,9 @@ async function addCartData(body) {
 
 };
 async function removeCartData(body) {
-    console.log("request Body", `http://localhost:8080/api/removeCartDetails/${body.id}`);
     try {
-        let res = await axios.delete(`http://localhost:8080/api/removeCartDetails/${body.id}`);
-        console.log("response--->",res.data);  
+        let res = await axios_instance.delete(`http://localhost:8080/api/removeCartDetails/${body.id}`);
         return res
-
     } catch (error) {
         console.log("error");
 
@@ -32,11 +26,9 @@ const getCartData = () => {
    
    return dispatch => {
      // dispatch(updateInitialState());
-     console.log("Hi Hello");
-     axios
+     axios_instance
        .get(`http://localhost:8080/api/cartList`)
        .then(res => {
-       console.log(res.data);            
          dispatch(updateCartInitialState(res.data));
        })
        .catch(err => {
