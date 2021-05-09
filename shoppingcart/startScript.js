@@ -13,9 +13,8 @@ function load(folderName) {
         if (stat.isDirectory()) {
             //Recursively walk-through folders
             load(fullName);
-        } else if (file.toLowerCase().indexOf('.js')) {
-            console.log(fullName);
-            imagePaths.push(fullName);            
+        } else if (file.toLowerCase().indexOf('.jpeg')>-1) {           
+            imagePaths.push(fullName.split('/').slice(1).join('/'));            
             //Grab path to JavaScript file and use it to construct the route
             // let dirs = path.dirname(fullName).split(path.sep);
             // const baseRoute = '/' + dirs.join('/');

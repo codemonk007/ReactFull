@@ -1,52 +1,47 @@
 
 import React, { Component } from 'react';
-import * as fs from 'browserify-fs';
+import * as json from './../../../assets/imageImportJson';
+
 import './carousal.css';
-var path = require('path');
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft,faArrowRight } from '@fortawesome/fontawesome-free-solid';
+
 class Carousal extends Component {
+    index =0;
     state ={
-        imagePaths:[]
+        imgSrc:this.props.imageImports[0]
     }
-    LoadImages(folderName){
-        let imagePaths =[];
-        this.load(folderName);
-        this.setState(
-            {...this.state,imagePaths:imagePaths},
-            () => console.log(this.state)
-            )
+    rotateLeft(){
+        if(this.index > 0){
+        this.index = this.index-1;
+        this.setState({...this.state, imgSrc:this.props.imageImports[this.index]})
     }
-    load(folderName) {
-        if (!this.startFolder) this.startFolder = path.basename(folderName);
-        fs.readdirSync(folderName).forEach((file) => {
-    
-            const fullName = path.join(folderName, file);
-            const stat = fs.lstatSync(fullName);
-    
-            if (stat.isDirectory()) {
-                //Recursively walk-through folders
-                this.load(fullName);
-            } else if (file.toLowerCase().indexOf('.js')) {
-                console.log(fullName);
-                this.imagePaths.push(fullName);            
-                //Grab path to JavaScript file and use it to construct the route
-                // let dirs = path.dirname(fullName).split(path.sep);
-                // const baseRoute = '/' + dirs.join('/');
-                // console.log(dirs);  
-                // console.log('Created route: ' + baseRoute + ' for ' + fullName);
-                  
-                // if (dirs[0].toLowerCase() === this.startFolder.toLowerCase()) {
-                //     dirs.splice(0, 1);
-                // }
-            }
-        });
     }
-    render() {
-        this.LoadImages("./public/carousal");
-        console.log(this.state);
-        
+    rotateRight(){
+        console.log(this.index);      
+        console.log(this.props.imageImports);          
+        if(this.index < this.props.imageImports.length-1){
+            this.index = this.index+1;
+            this.setState({...this.state, imgSrc:this.props.imageImports[this.index]})
+            console.log(this.props.imageImports[this.index]);  
+        }
+    }
+   
+    render() {      
+        console.log(this.props.imageImports);
+
         return (
-            <div className="footer">
-                <p>hello</p>
+            <div>
+                <button type="button" 
+                onClick={()=>this.rotateLeft()}
+                className="btn btn-danger" id="buttonleft">
+                    <FontAwesomeIcon icon={faArrowLeft} /></button>
+                    <button type="button" 
+                     onClick={()=>this.rotateRight()}
+                    className="btn btn-danger" id="buttonRight">
+                    <FontAwesomeIcon icon={faArrowRight} /></button> 
+                 <img style={{"height": '350px',
+                "width": '100%'}} src={`./${this.state.imgSrc}`} alt="no"></img>
             </div>
         )
     }

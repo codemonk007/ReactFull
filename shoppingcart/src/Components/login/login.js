@@ -5,6 +5,10 @@ import './login.css';
 import loginHelper from './../../API_Calls/loginHelper';
 import {getToken} from './../../utils/jwt_secret';
 class ProductList extends Component {
+    constructor(){
+        super();
+        console.log("constructore");
+    }
 set = {
     name:"",
     password:null
@@ -21,7 +25,8 @@ async onSubmit(value){
     }    
 }
 render(){
-    return <form onSubmit = {($event)=> this.onSubmit($event)}>
+    return <div>
+    <form onSubmit = {($event)=> this.onSubmit($event)}>
       <div className="container">
           <div className="row">
           <div className="col-sm-12"> 
@@ -36,6 +41,7 @@ render(){
       </div>
         <button className="btn btn-primary submit" type="submit">submit</button>
     </form>
+    </div>
 }
 
 }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Home.css';
 import { connect } from 'react-redux';
+import Carousal from './../carousal/carousal';
+import imageImport from './../../../assets/imageImportJson';
+
 class Home extends Component {
     productHandler() {
         this.props.history.push("/productlist");
@@ -9,6 +12,8 @@ class Home extends Component {
         let types = Object.keys(this.props.product);
         console.log("types", types);
         return (
+           <div>
+                <Carousal imageImports={imageImport.carousal.product}></Carousal>
             <div>
                 {
                     types.map(outerelement => {
@@ -18,6 +23,7 @@ class Home extends Component {
                     })
                 }
             </div>
+           </div>
         )
     }
 }
